@@ -6,7 +6,6 @@ import 'package:cloud_text_to_speech/src/google/audio/audio_response_mapper.dart
 import 'package:cloud_text_to_speech/src/google/audio/audio_responses.dart';
 import 'package:cloud_text_to_speech/src/google/auth/authentication_types.dart';
 import 'package:cloud_text_to_speech/src/google/common/constants.dart';
-import 'package:cloud_text_to_speech/src/google/ssml/ssml.dart';
 import 'package:http/http.dart' as http;
 
 class AudioHandlerGoogle {
@@ -20,11 +19,8 @@ class AudioHandlerGoogle {
     final mapper = AudioResponseMapperGoogle();
 
     try {
-      final ssml =
-          SsmlGoogle(text: params.text, rate: params.rate, pitch: params.pitch);
-
       final Map<String, dynamic> body = {
-        'input': {'ssml': ssml.sanitizedSsml},
+        'input': {'text': params.text},
         'voice': {
           'name': params.voice.code,
           'languageCode': params.voice.locale.code
